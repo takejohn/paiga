@@ -1,0 +1,13 @@
+{
+    "tasks": {
+        "start": "deno serve --port 48000 main.ts",
+        "dev": "deno serve --port 48000 --watch main.ts"
+    },
+    "fmt": {
+        "indentWidth": 4,
+        "singleQuote": true
+    },
+    "imports": {
+        "@hono/hono": "jsr:@hono/hono@^4.4.7"
+    }
+}
