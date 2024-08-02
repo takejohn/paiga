@@ -1,7 +1,7 @@
 {
     "tasks": {
-        "start": "deno serve --port 48000 main.ts",
-        "dev": "deno serve --port 48000 --watch main.ts"
+        "start": "deno serve --port 48000 src/main.ts",
+        "dev": "deno serve --port 48000 --watch src/main.ts"
     },
     "fmt": {
         "indentWidth": 4,
