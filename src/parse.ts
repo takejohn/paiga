@@ -1,7 +1,8 @@
-import { TileNumber, HonorNumber, TileSet, Tile } from './types.ts';
+import { HonorNumber, Tile, TileNumber, TileSet } from './types.ts';
 
 function isHonorNumber(n: TileNumber): n is HonorNumber {
-    return n == '1' || n == '2' || n == '3' || n == '4' || n == '5' || n == '6' || n == '7';
+    return n == '1' || n == '2' || n == '3' || n == '4' || n == '5' ||
+        n == '6' || n == '7';
 }
 
 export function parseTiles(pattern: string): TileSet {
@@ -34,7 +35,9 @@ export function parseTiles(pattern: string): TileSet {
 
             case 'z':
                 if (!numbers.every(isHonorNumber)) {
-                    throw new TypeError('Unexpected \'z\' because of leading numbers');
+                    throw new TypeError(
+                        "Unexpected 'z' because of leading numbers",
+                    );
                 }
                 for (const n of numbers) {
                     hand.push(`${n}z`);

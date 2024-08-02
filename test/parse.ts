@@ -1,4 +1,4 @@
-import { assertEquals} from '@std/assert';
+import { assertEquals } from '@std/assert';
 import { parseTiles } from '../src/parse.ts';
 
 Deno.test('parse', async (t) => {
