@@ -18,6 +18,8 @@ Deno.test('parse', async (t) => {
                 '2z',
                 '3z',
             ],
+            horaTile: null,
+            fuuro: [],
         });
     });
 
@@ -37,6 +39,64 @@ Deno.test('parse', async (t) => {
                 '9m',
                 '9m',
                 '9m',
+            ],
+            horaTile: null,
+            fuuro: [],
+        });
+    });
+
+    await t.step('34567m456p22678s+4m', () => {
+        assertEquals(parseTiles('34567m456p22678s+4m'), {
+            hand: [
+                '3m',
+                '4m',
+                '5m',
+                '6m',
+                '7m',
+                '4p',
+                '5p',
+                '6p',
+                '2s',
+                '2s',
+                '6s',
+                '7s',
+                '8s',
+            ],
+            horaTile: '4m',
+            fuuro: [],
+        });
+    });
+
+    await t.step('3z+3z+_11_z+3-12m+55=55z+999-s', () => {
+        assertEquals(parseTiles('3z+3z+_11_z+3-12m+55=55z+999-s'), {
+            hand: ['3z'],
+            horaTile: '3z',
+            fuuro: [
+                {
+                    type: 'ankan',
+                    tiles: ['1z', '1z'],
+                },
+                {
+                    type: 'minmentsu',
+                    called: '3m',
+                    kakan: null,
+                    left: [],
+                    right: ['1m', '2m'],
+                },
+                {
+                    type: 'minmentsu',
+                    called: '5z',
+                    kakan: '5z',
+                    left: ['5z'],
+                    right: ['5z'],
+                },
+                {
+                    type: 'minmentsu',
+                    called: '9s',
+                    kakan: null,
+                    left: ['9s', '9s'],
+                    right: [],
+                },
             ],
         });
     });
