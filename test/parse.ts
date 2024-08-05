@@ -67,8 +67,8 @@ Deno.test('parse', async (t) => {
         });
     });
 
-    await t.step('3z+3z+_11_z+3-12m+55=55z+999-s', () => {
-        assertEquals(parseTiles('3z+3z+_11_z+3-12m+55=55z+999-s'), {
+    await t.step('3z+3z_11_z3-12m55=55z999-s', () => {
+        assertEquals(parseTiles('3z+3z_11_z3-12m55=55z999-s'), {
             hand: ['3z'],
             horaTile: '3z',
             fuuro: [

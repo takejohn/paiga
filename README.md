@@ -1,7 +1,7 @@
 ## Syntax
 
 ```abnf
-Pattern = Hand ["+" HoraTile] *("+" Fuuro)
+Pattern = Hand ["+" [HoraTile] *(Fuuro)]
 Hand = 1*(1*Number Suit)
 HoraTile = Number Suit
 Fuuro = Minmentsu / Ankan

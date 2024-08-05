@@ -94,7 +94,7 @@ class Parser {
         this.chars = new CharStream(pattern);
     }
 
-    // Pattern = Hand ["+" HoraTile] *("+" Fuuro)
+    // Pattern = Hand ["+" [HoraTile] *(Fuuro)]
     parse(): TileSet {
         const hand = this.parseHand();
 
@@ -117,7 +117,6 @@ class Parser {
         const fuuroArray: Fuuro[] = [];
 
         while (this.chars.length > 0) {
-            this.chars.expect('+');
             const fuuro = this.parseFuuro();
             fuuroArray.push(fuuro);
         }
