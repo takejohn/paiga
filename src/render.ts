@@ -40,8 +40,17 @@ const TILE_IMAGES = new Map<Tile, Image>(
     ).flat(),
 );
 
-export function renderTiles(tiles: TileSet) {
-    const { hand } = tiles;
+const MARGIN = 8;
+
+export function renderTiles(tiles: TileSet): Image {
+    const hand =  renderHand(tiles.hand);
+    const image = new Image(hand.width + MARGIN * 2, hand.height + MARGIN * 2);
+    image.fill(0x004000ff);
+    image.composite(hand, MARGIN, MARGIN);
+    return image;
+}
+
+function renderHand(hand: TileSet['hand']): Image {
     const image = new Image(
         TILE_BACKGROUND_WIDTH * hand.length,
         TILE_BACKGROUND_HEIGHT,
