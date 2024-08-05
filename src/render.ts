@@ -11,7 +11,7 @@ const TILE_BACKGROUND_H2_IMAGE: Image = await decode(
     await Deno.readFile('assets/mahjong-tile-background-h2_15x21.png'),
 ) as Image;
 const TILE_BACK_IMAGE: Image = await decode(
-    await Deno.readFile('assets/mahjong-tile-back_15x21.png')
+    await Deno.readFile('assets/mahjong-tile-back_15x21.png'),
 ) as Image;
 
 const TILE_WIDTH = TILE_BACKGROUND_IMAGE.width;
@@ -70,18 +70,30 @@ export function renderTiles(tiles: TileSet): Image {
     }
 
     const fuuro = tiles.fuuro.length != 0 ? renderFuuro(tiles.fuuro) : null;
-    const width = handWidth + horaTileWidth + (fuuro != null ? fuuro.width + MARGIN : 0) + MARGIN;
-    const image = new Image(width, (fuuro != null ? fuuro.height : TILE_HEIGHT) + MARGIN * 2);
+    const width = handWidth + horaTileWidth +
+        (fuuro != null ? fuuro.width + MARGIN : 0) + MARGIN;
+    const image = new Image(
+        width,
+        (fuuro != null ? fuuro.height : TILE_HEIGHT) + MARGIN * 2,
+    );
     image.fill(0x004000ff);
 
     if (hand != null) {
         image.composite(hand, MARGIN, image.height - MARGIN - hand.height);
     }
     if (horaTile != null) {
-        image.composite(horaTile, handWidth + MARGIN, image.height - MARGIN - horaTile.height);
+        image.composite(
+            horaTile,
+            handWidth + MARGIN,
+            image.height - MARGIN - horaTile.height,
+        );
     }
-    if (fuuro != null)  {
-        image.composite(fuuro, handWidth + horaTileWidth + MARGIN, image.height - MARGIN - fuuro.height);
+    if (fuuro != null) {
+        image.composite(
+            fuuro,
+            handWidth + horaTileWidth + MARGIN,
+            image.height - MARGIN - fuuro.height,
+        );
     }
 
     return image;
@@ -89,7 +101,11 @@ export function renderTiles(tiles: TileSet): Image {
 
 function renderTile(tile: Tile): Image {
     const image = TILE_BACKGROUND_IMAGE.clone();
-    image.composite(TILE_IMAGES.get(tile)!, TILE_PICTURE_X_OFFSET, TILE_PICTURE_Y_OFFSET);
+    image.composite(
+        TILE_IMAGES.get(tile)!,
+        TILE_PICTURE_X_OFFSET,
+        TILE_PICTURE_Y_OFFSET,
+    );
     return image;
 }
 
@@ -121,9 +137,14 @@ function renderHand(hand: TileSet['hand']): Image {
 }
 
 function renderFuuro(fuuro: TileSet['fuuro']): Image {
-    const images = fuuro.map((fuuro) => fuuro.type == 'minmentsu' ? renderMinmentsu(fuuro) : renderAnkan(fuuro));
+    const images = fuuro.map((fuuro) =>
+        fuuro.type == 'minmentsu' ? renderMinmentsu(fuuro) : renderAnkan(fuuro)
+    );
     const width = images.reduce((x, image) => x + image.width, 0);
-    const height = images.reduce((x, image) => x > image.height ? x : image.height, 0);
+    const height = images.reduce(
+        (x, image) => x > image.height ? x : image.height,
+        0,
+    );
     const result = new Image(width, height);
     let xOffset = 0;
     for (const image of images) {
@@ -134,20 +155,27 @@ function renderFuuro(fuuro: TileSet['fuuro']): Image {
 }
 
 function renderMinmentsu(fuuro: Minmentsu): Image {
-    const width = TILE_H_WIDTH + (fuuro.left.length + fuuro.right.length) * TILE_WIDTH;
+    const width = TILE_H_WIDTH +
+        (fuuro.left.length + fuuro.right.length) * TILE_WIDTH;
     const height = fuuro.kakan == null ? TILE_HEIGHT : TILE_H2_HEIGHT;
     const image = new Image(width, height);
     let xOffset = 0;
     for (const tile of fuuro.left) {
-        const tileImage = renderTile(tile)
+        const tileImage = renderTile(tile);
         image.composite(tileImage, xOffset, image.height - tileImage.height);
         xOffset += tileImage.width;
     }
-    const calledTilesImage = fuuro.kakan == null ? renderFuuroTile(fuuro.called) : renderKakanTiles(fuuro.called, fuuro.kakan);
-    image.composite(calledTilesImage, xOffset, image.height - calledTilesImage.height);
+    const calledTilesImage = fuuro.kakan == null
+        ? renderFuuroTile(fuuro.called)
+        : renderKakanTiles(fuuro.called, fuuro.kakan);
+    image.composite(
+        calledTilesImage,
+        xOffset,
+        image.height - calledTilesImage.height,
+    );
     xOffset += calledTilesImage.width;
     for (const tile of fuuro.right) {
-        const tileImage = renderTile(tile)
+        const tileImage = renderTile(tile);
         image.composite(tileImage, xOffset, image.height - tileImage.height);
         xOffset += tileImage.width;
     }

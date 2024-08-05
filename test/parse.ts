@@ -100,4 +100,38 @@ Deno.test('parse', async (t) => {
             ],
         });
     });
+
+    await t.step('7z+_11_z2=222z33-33z4444-z', () => {
+        assertEquals(parseTiles('7z+_11_z2=222z33-33z4444-z'), {
+            hand: ['7z'],
+            horaTile: null,
+            fuuro: [
+                {
+                    type: 'ankan',
+                    tiles: ['1z', '1z'],
+                },
+                {
+                    type: 'minmentsu',
+                    called: '2z',
+                    kakan: '2z',
+                    left: [],
+                    right: ['2z', '2z'],
+                },
+                {
+                    type: 'minmentsu',
+                    called: '3z',
+                    kakan: null,
+                    left: ['3z'],
+                    right: ['3z', '3z'],
+                },
+                {
+                    type: 'minmentsu',
+                    called: '4z',
+                    kakan: null,
+                    left: ['4z', '4z', '4z'],
+                    right: [],
+                },
+            ],
+        });
+    });
 });
