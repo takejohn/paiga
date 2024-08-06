@@ -76,7 +76,6 @@ export function renderTiles(tiles: TileSet): Image {
         width,
         (fuuro != null ? fuuro.height : TILE_HEIGHT) + MARGIN * 2,
     );
-    image.fill(0x004000ff);
 
     if (hand != null) {
         image.composite(hand, MARGIN, image.height - MARGIN - hand.height);
