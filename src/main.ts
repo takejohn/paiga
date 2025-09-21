@@ -17,7 +17,7 @@ app.get('/:pattern', async (c) => {
     const pattern = removeSuffix(c.req.param('pattern'), '.png');
     const tiles = parseTiles(pattern);
     const image = renderTiles(tiles);
-    const png = await image.encode();
+    const png = await image.encode() as Uint8Array<ArrayBuffer>;
     c.header('Content-Type', 'image/png');
     return c.body(png);
 });

@@ -1,5 +1,5 @@
 import { Ankan, Minmentsu, Tile, TileSet } from './types.ts';
-import { decode, Image } from 'x/imagescript';
+import { decode, Image } from '@matmen/imagescript';
 
 const TILE_BACKGROUND_IMAGE: Image = await decode(
     await Deno.readFile('assets/mahjong-tile-background_15x21.png'),
